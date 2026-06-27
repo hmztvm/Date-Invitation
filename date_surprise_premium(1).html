@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A Little Surprise ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<style>
+*{box-sizing:border-box;font-family:Poppins,sans-serif}body{margin:0;display:flex;justify-content:center;align-items:center;height:100vh;background:linear-gradient(135deg,#ff9ecf,#ffd5e5);overflow:hidden}
+.heart{position:fixed;bottom:-20px;animation:float 8s linear infinite;opacity:.5}
+@keyframes float{to{transform:translateY(-110vh);opacity:0}}
+.card{background:rgba(255,255,255,.92);backdrop-filter:blur(10px);padding:36px;border-radius:24px;max-width:560px;width:92%;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.15)}
+.hidden{display:none}button{padding:14px 28px;border:none;border-radius:14px;font-size:18px;margin:8px;cursor:pointer;transition:.25s}
+#yes{background:#ff4d8d;color:#fff}#no{background:#eee}#msg{height:28px;color:#ff4d8d;font-weight:600}
+#ps{margin-top:25px;color:#888;cursor:pointer;font-size:13px}
+</style></head><body>
+<div class="card">
+<div id=p1><h1>💌 A Little Surprise</h1><p id=type></p><button id=start class=hidden>Open It ✨</button></div>
+<div id=p2 class=hidden><h2>📅 Date Plan</h2><p><b>June 29</b><br>2:10 PM ❤️</p><p>Do you confirm our date?</p><button id=yes>Yes, I do! ❤️</button><button id=no>Not yet 😅</button><div id=msg></div></div>
+<div id=p3 class=hidden><h1>🎉 Mission Accepted!</h1><p>I can't wait to see you ❤️</p><div id=cd></div></div>
+</div>
+<script>
+["❤️","💕","💖","💗"].forEach((h,i)=>{for(let j=0;j<8;j++){let s=document.createElement("div");s.className="heart";s.innerText=h;s.style.left=Math.random()*100+"vw";s.style.animationDelay=Math.random()*8+"s";s.style.fontSize=(12+Math.random()*18)+"px";document.body.appendChild(s);}});
+const text="Hi...\nI have a little surprise for you...\nIt's about June 29. ❤️";let i=0;function t(){if(i<text.length){type.textContent+=text[i++];setTimeout(t,45)}else start.classList.remove("hidden")}t();
+start.onclick=()=>{p1.classList.add("hidden");p2.classList.remove("hidden")}
+let ns=1,ys=1,c=0;let arr=["🥺 Are you sure?","Think again 😊","I'm getting smaller 😂","Almost gone 🤏","Only one choice left ❤️"];
+no.onclick=()=>{msg.textContent=arr[Math.min(c,arr.length-1)];c++;ns*=0.7;ys*=1.2;no.style.transform=`scale(${ns})`;yes.style.transform=`scale(${ys})`;if(ns<0.18)no.style.display="none";}
+yes.onclick=()=>{p2.classList.add("hidden");p3.classList.remove("hidden");confetti({particleCount:250,spread:120});}
+const target=new Date("2026-06-29T14:10:00");setInterval(()=>{let d=target-new Date();if(d<0){cd.textContent="❤️ It's time!";return;}let D=Math.floor(d/86400000),H=Math.floor(d/36e5)%24,M=Math.floor(d/6e4)%60,S=Math.floor(d/1e3)%60;cd.textContent=`${D} days ${H} hours ${M} minutes ${S} seconds`;},1000);
+
+</script></body></html>
